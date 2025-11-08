@@ -1,0 +1,262 @@
+/* ===== 1) Design tokens: ثبات رنگ و فضا ===== */
+:root {
+  --bg: #0b1020; /* REVIEW: پس‌زمینه تیره مدرن برای رزومه */
+  --surface: #11162a; /* کارت‌ها/کانتینر */
+  --text: #e6e9f2; /* متن اصلی با کنتراست کافی */
+  --muted: #a3acc2;
+  --brand: #4f46e5; /* رنگ اصلی */
+  --brand-2: #06b6d4; /* رنگ ثانویه برای گرادیان */
+  --danger: #ef4444;
+  --radius: 14px;
+  --space: 16px;
+}
+
+/* ===== 2) Reset سبک و حذف color سراسری خطرناک ===== */
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* REVIEW: به‌جای color روی * ، رنگ‌ها را روی مؤلفه‌ها مشخص کن. */
+
+/* ===== 3) تایپوگرافی به‌روز و بهینه ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap'); /* REVIEW: Inter خواناتر از Raleway */
+body {
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  line-height: 1.6;
+}
+
+/* ===== 4) Header مدرن با گرادیان کم‌سروصدا ===== */
+.main-header {
+  background: radial-gradient(
+      70% 120% at 10% 10%,
+      rgba(79, 70, 229, 0.35),
+      transparent 60%
+    ),
+    radial-gradient(
+      60% 100% at 90% 10%,
+      rgba(6, 182, 212, 0.25),
+      transparent 60%
+    ),
+    linear-gradient(180deg, #0c1430, #0a1128);
+  padding: 3.5rem 1rem 4.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.main-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+}
+.main-nav a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  position: relative;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+.main-nav a:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+} /* REVIEW: a11y */
+.main-nav a:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+/* ===== 5) تیتر اصلی: جمع‌وجور و حرفه‌ای ===== */
+.band-name {
+  margin: 1.2rem 0 0;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.band-name-large {
+  font-size: clamp(2.2rem, 4vw, 3.75rem);
+} /* REVIEW: clamp برای ریسپانسیو */
+
+/* ===== 6) Container عمومی ===== */
+.container {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 0 1.25rem;
+}
+.section-header {
+  text-align: center;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  color: var(--muted);
+}
+
+/* ===== 7) Grid فروشگاه ===== */
+.shop-items {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+.shop-item {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+.shop-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+}
+.shop-item-image {
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  /* REVIEW: تصویر بریده نمی‌شود و ریسپانسیو می‌ماند */
+}
+.shop-item-title {
+  font-weight: 600;
+  color: #fff;
+  margin: 0.75rem 0 0.25rem;
+}
+.shop-item-price {
+  color: var(--muted);
+}
+
+/* ===== 8) دکمه‌ها با حالت focus/hover صحیح ===== */
+.btn {
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 0.6rem .8rem;
+  font-weight: 400;
+  transition: transform 0.15s ease, opacity 0.2s ease,
+    background-color 0.25s ease;
+}
+.btn-purchase{
+  background: var(--brand-2);
+  color: #fff;
+  width: 20%;
+  margin-top: 1.2rem;
+ 
+}
+.btn:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+  color: #fff;
+  margin-left: 20px;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+}
+.btn-danger {
+  background: var(--danger);
+  color: #fff;
+}
+.btn-danger:hover {
+  opacity: 0.9;
+}
+
+/* ===== 9) سبد خرید با Grid پایدار (نه درصدهای شکننده) ===== */
+.cart-row {
+  display: grid;
+  grid-template-columns: 1fr 120px 160px; /* item | price | quantity */
+  gap: 1rem;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.9rem 0;
+}
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.cart-item-image {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.cart-item-title {
+  color: #fff;
+  font-weight: 600;
+}
+.cart-price {
+  text-align: center;
+}
+.cart-quantity {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cart-quantity-input {
+  width: 56px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: #0f1733;
+  color: #fff;
+  text-align: center;
+  font-weight: 600;
+}
+
+.cart-total {
+  text-align: right;
+  margin-top: 1rem;
+}
+.cart-total-title {
+  color: #fff;
+  margin-right: 0.5rem;
+}
+.cart-total-price {
+  color: var(--brand-2);
+  font-weight: 700;
+}
+
+/* ===== 10) Footer تمیز و امن ===== */
+.footer-nav {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  gap: 1.5rem; 
+  list-style: none; 
+  padding: 0;
+  margin: 100px 0 40px 0;
+}
+.footer-nav img {
+  width: 28px;
+  height: 28px;
+  filter: brightness(0) invert(1);
+}
+.footer-nav a {
+  display: inline-block;
+  text-decoration: none;
+  transition: opacity 0.25s ease;
+}
+
+/* ===== 11) Motion respect ===== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
